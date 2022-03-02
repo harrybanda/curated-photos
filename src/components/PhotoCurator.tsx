@@ -19,7 +19,11 @@ const PhotoCurator = (props: PhotoCuratorProps) => {
 
   return (
     <>
-      <PhotoModal showModal={showModal} currentImg={currentImg} />
+      <PhotoModal
+        showModal={showModal}
+        currentImg={currentImg}
+        setShowModal={setShowModal}
+      />
       <div className="photos">
         {props.photos.map((photo) => (
           <div className="photo" key={photo.id}>
