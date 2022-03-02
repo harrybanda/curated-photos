@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import PhotoCurator from "./components/PhotoCurator";
 const { REACT_APP_ACCESS_KEY } = process.env;
 const UNSPLASH_API = "https://api.unsplash.com/photos/?client_id=";
 
@@ -18,6 +19,10 @@ function App() {
       .then(function () {});
   }, []);
 
-  return <div>{JSON.stringify(photos)}</div>;
+  return (
+    <div>
+      <PhotoCurator photos={photos} />
+    </div>
+  );
 }
 export default App;
