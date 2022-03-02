@@ -7,7 +7,7 @@ const UNSPLASH_API = "https://api.unsplash.com/photos/?client_id=";
 function App() {
   const [photos, setPhotos] = useState<any[]>([]);
 
-  useEffect(() => {
+  const getPhotos = () => {
     axios
       .get(UNSPLASH_API + REACT_APP_ACCESS_KEY)
       .then(function (response) {
@@ -17,7 +17,15 @@ function App() {
         console.log(error);
       })
       .then(function () {});
+  };
+
+  useEffect(() => {
+    getPhotos();
   }, []);
+
+  if (!photos) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
