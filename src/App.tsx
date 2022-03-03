@@ -4,20 +4,21 @@ import PhotoCurator from "./components/PhotoCurator";
 
 function App() {
   const [photos, setPhotos] = useState<any[]>([]);
+  const [page, setPage] = useState(1);
 
   const getPhotos = async () => {
-    const params = {
-      per_page: 10,
-      page: 1,
-    };
-
     try {
-      const response = await api.get("/photos/", { params: params });
-      console.log(response);
-      setPhotos(response.data);
+      const response = await api.get("/photos/", {
+        params: {
+          per_page: 10,
+          page: page,
+        },
+      });
+      setPhotos([...photos, ...response.data]);
     } catch (error) {
       console.log(error);
     }
+    setPage(page + 1);
   };
 
   useEffect(() => {
@@ -30,7 +31,7 @@ function App() {
 
   return (
     <div>
-      <PhotoCurator photos={photos} />
+      <PhotoCurator photos={photos} fetchPhotos={getPhotos} />
     </div>
   );
 }
