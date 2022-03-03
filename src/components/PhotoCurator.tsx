@@ -11,10 +11,11 @@ interface PhotoCuratorProps {
 
 const PhotoCurator = (props: PhotoCuratorProps) => {
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [currentImg, setCurrentImg] = useState<string>("");
+  const [currentImg, setCurrentImg] = useState<any>({});
 
-  const getImg = (imgURL: string) => {
-    setCurrentImg(imgURL);
+  const getImg = (imgURL: string, description: String) => {
+    const imageData = { imgURL: imgURL, description: description };
+    setCurrentImg(imageData);
     setShowModal(true);
   };
 
@@ -32,7 +33,7 @@ const PhotoCurator = (props: PhotoCuratorProps) => {
               src={photo.urls.regular}
               effect="blur"
               style={{ width: "100%" }}
-              onClick={() => getImg(photo.urls.regular)}
+              onClick={() => getImg(photo.urls.regular, photo.description)}
             />
           </div>
         ))}
