@@ -13,9 +13,8 @@ const PhotoCurator = (props: PhotoCuratorProps) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [currentImg, setCurrentImg] = useState<any>({});
 
-  const getImg = (imgURL: string, description: String) => {
-    const imageData = { imgURL: imgURL, description: description };
-    setCurrentImg(imageData);
+  const getImg = (photo: any) => {
+    setCurrentImg(photo);
     setShowModal(true);
   };
 
@@ -25,6 +24,7 @@ const PhotoCurator = (props: PhotoCuratorProps) => {
         showModal={showModal}
         currentImg={currentImg}
         setShowModal={setShowModal}
+        photos={props.photos}
       />
       <div className="photos">
         {props.photos.map((photo) => (
@@ -33,7 +33,7 @@ const PhotoCurator = (props: PhotoCuratorProps) => {
               src={photo.urls.regular}
               effect="blur"
               style={{ width: "100%" }}
-              onClick={() => getImg(photo.urls.regular, photo.description)}
+              onClick={() => getImg(photo)}
             />
           </div>
         ))}
