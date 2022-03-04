@@ -14,11 +14,19 @@ function App() {
           page: page,
         },
       });
-      setPhotos([...photos, ...response.data]);
+      setPhotos(filterDuplicateIds([...photos, ...response.data]));
+      console.log(photos);
     } catch (error) {
       console.log(error);
     }
     setPage(page + 1);
+  };
+
+  const filterDuplicateIds = (data: any[]) => {
+    var uniq = data.filter(function ({ id }) {
+      return !data[id] && (data[id] = id);
+    }, {});
+    return uniq;
   };
 
   useEffect(() => {

@@ -12,7 +12,6 @@ interface PhotoCuratorProps {
 const PhotoCurator = (props: PhotoCuratorProps) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [currentImg, setCurrentImg] = useState<any>({});
-  const [hasMore, setHasMore] = useState(true);
 
   const getImg = (photo: any) => {
     setCurrentImg(photo);
@@ -31,7 +30,7 @@ const PhotoCurator = (props: PhotoCuratorProps) => {
       <InfiniteScroll
         dataLength={props.photos.length}
         next={props.fetchPhotos}
-        hasMore={hasMore}
+        hasMore={true}
         loader={<p>Loading...</p>}
       >
         <div className="photos">
